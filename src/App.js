@@ -1,25 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import { getMonth } from "./util";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  console.log(getMonth()[0][1]["$y"]); //2021
+  /*
+  getMonth() => (5)[arr(7), arr(7), arr(7), arr(7), arr(7)]
+  each arr has 7 days[{..}*7]
+  each {} => {$D:1, $M:11, $y:2021...}
+  */
+  return <div className="App">hello</div>;
 }
 
 export default App;
