@@ -6,7 +6,7 @@ export default function Day({ day, weekIdx }) {
     // console.log("format-->", day.format("DD-MM-YY"));
     //dayjs().format() indiciates today's daate
     return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
-      ? "bg-pink-300 text-white rounded-full w-7"
+      ? "bg-red-200 text-white rounded-full w-7"
       : "";
   }
   return (
