@@ -10,7 +10,6 @@ export default function CalendarHeader() {
   }
   function handleNextMonth() {
     setMonthIndex(monthIndex + 1);
-    console.log("onclick-->", monthIndex);
   }
   function handleReset() {
     setMonthIndex(dayjs().month());
