@@ -1,4 +1,3 @@
-//each day of calendar
 import dayjs from "dayjs";
 //month 0-11
 export function getMonth(month = dayjs().month()) {
