@@ -25,26 +25,36 @@ export default function SmallCalendar() {
   function handleNextMonth() {
     setCurrentMonthIdx(currentMonthIdx + 1);
   }
+  function getDayClass(day) {
+    const format = "DD-MM-YY";
+    const dayNow = dayjs().format(format);
+    const currentDay = day.format(format);
+    if (dayNow === currentDay) return "bg-red-200 rounded-full text-white";
+    else return "";
+  }
+
   return (
     <div className="mt-9">
       <header className="flex justify-between">
         <p className="text-gray-500 font-bold">
           {dayjs(new Date(dayjs().year(), currentMonthIdx)).format("MMMM YYYY")}
         </p>
-        <button
-          onClick={handlePrevMonth}
-          className="material-icons-outlined cursor-ponter text-gray-600 mx-2"
-        >
-          {/* mx-2 => margin-left: 0.5rem, margin-right: 0.5rem; */}
-          chevron_left
-        </button>
+        <div>
+          <button
+            onClick={handlePrevMonth}
+            className="material-icons-outlined cursor-ponter text-gray-600 mx-2"
+          >
+            {/* mx-2 => margin-left: 0.5rem, margin-right: 0.5rem; */}
+            chevron_left
+          </button>
 
-        <button
-          onClick={handleNextMonth}
-          className="material-icons-outlined cursor-ponter text-gray-600 mx-2"
-        >
-          chevron_right
-        </button>
+          <button
+            onClick={handleNextMonth}
+            className="material-icons-outlined cursor-ponter text-gray-600 mx-2"
+          >
+            chevron_right
+          </button>
+        </div>
       </header>
       <div className="grid grid-cols-7 grid-rows-6">
         {currentMonth[0].map((day, i) => (
@@ -57,7 +67,7 @@ export default function SmallCalendar() {
         {currentMonth.map((row, i) => (
           <React.Fragment key={i}>
             {row.map((day, idx) => (
-              <button key={idx} className={`py-1 w-full`}>
+              <button key={idx} className={`py-1 w-full ${getDayClass(day)}`}>
                 {/* py = > padding-top: 0.25rem; padding-bottom: 0.25rem; */}
                 <span className="text-sm">{day.format("D")}</span>
               </button>
