@@ -14,7 +14,9 @@ export default function SmallCalendar() {
 
   //monthIndex 11 because we are on Dec now
   //if move month with arrows on the header, the gloal monthIndex changes
-  const { monthIndex } = useContext(GlobalContext);
+  const { monthIndex, setSmallCalendarMonth, setDaySelected, daySelected } =
+    useContext(GlobalContext);
+
   useEffect(() => {
     setCurrentMonthIdx(monthIndex);
   }, [monthIndex]);
@@ -25,12 +27,16 @@ export default function SmallCalendar() {
   function handleNextMonth() {
     setCurrentMonthIdx(currentMonthIdx + 1);
   }
+
   function getDayClass(day) {
     const format = "DD-MM-YY";
     const dayNow = dayjs().format(format);
     const currentDay = day.format(format);
+    const selDay = daySelected && daySelected.format(format);
     if (dayNow === currentDay) return "bg-red-200 rounded-full text-white";
-    else return "";
+    else if (currentDay === selDay) {
+      return "bg-red-200 rounded-full text-red-500 font-bold text-blue-600 font-bold";
+    } else return "";
   }
 
   return (
@@ -67,7 +73,14 @@ export default function SmallCalendar() {
         {currentMonth.map((row, i) => (
           <React.Fragment key={i}>
             {row.map((day, idx) => (
-              <button key={idx} className={`py-1 w-full ${getDayClass(day)}`}>
+              <button
+                key={idx}
+                className={`py-1 w-full ${getDayClass(day)}`}
+                onClick={() => {
+                  setSmallCalendarMonth(currentMonthIdx);
+                  setDaySelected(day);
+                }}
+              >
                 {/* py = > padding-top: 0.25rem; padding-bottom: 0.25rem; */}
                 <span className="text-sm">{day.format("D")}</span>
               </button>
