@@ -1,6 +1,7 @@
 import React from "react";
 import Day from "./Day";
 
+// {month} comes from App.js
 export default function Month({ month }) {
 
   return (

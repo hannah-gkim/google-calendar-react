@@ -6,6 +6,7 @@ export default function EventModal() {
   const [description, setDescription] = useState("");
   const [selectLabel, setSelectLabel] = useState(labelsClasses[0]);
   const { setShowEventModal, daySelected } = useContext(GlobalContext);
+
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
       <form className="bg-white rounded-lg shadow-2xl w-1/4">

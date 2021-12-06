@@ -3,6 +3,7 @@ import React from "react";
 import { useContext } from "react/cjs/react.development";
 import GlobalContext from "../context/GlobalContext";
 
+// {day} comes from Month.js
 export default function Day({ day, weekIdx }) {
   function getCurrentDayClass() {
     // console.log("format-->", day.format("DD-MM-YY"));
@@ -11,7 +12,9 @@ export default function Day({ day, weekIdx }) {
       ? "bg-red-200 text-white rounded-full w-7"
       : "";
   }
+
   const { setDaySelected, setShowEventModal } = useContext(GlobalContext);
+
   return (
     <div className="border border-gray-200 flex flex-col">
       <header className="flex flex-col items-center">
