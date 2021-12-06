@@ -6,7 +6,7 @@ useReducer manage the state similar to the useState hook,
 useReducer hook uses the same concept as the reducers in Redux.
 */
 
-function savedEventReducer(state, { type, payload }) {
+function savedEventsReducer(state, { type, payload }) {
   switch (type) {
     case "push":
       return [...state, payload];
@@ -30,11 +30,15 @@ export default function ContextWrapper(props) {
   const [smallCalendarMonth, setSmallCalendarMonth] = useState(null);
   const [daySelected, setDaySelected] = useState(dayjs());
   const [showEventModal, setShowEventModal] = useState(false);
-  const [savedEvent, dispatchCalEvent] = useReducer(
-    savedEventReducer,
+  const [savedEvents, dispatchCalEvent] = useReducer(
+    savedEventsReducer,
     [],
     initEvents
   );
+  useEffect(() => {
+    localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
+  }, [savedEvents]);
+
   useEffect(() => {
     if (smallCalendarMonth !== null) setMonthIndex(smallCalendarMonth);
   }, [smallCalendarMonth]);
@@ -50,6 +54,7 @@ export default function ContextWrapper(props) {
         setDaySelected,
         showEventModal,
         setShowEventModal,
+        dispatchCalEvent,
       }}
     >
       {props.children}
