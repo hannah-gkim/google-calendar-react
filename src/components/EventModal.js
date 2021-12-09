@@ -2,11 +2,18 @@ import React, { useContext, useState } from "react";
 import GlobalContext from "../context/GlobalContext";
 const labelsClasses = ["pink", "gray", "green", "blue", "red", "purple"];
 export default function EventModal() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [selectedLabel, setSelectedLabel] = useState(labelsClasses[0]);
-  const { setShowEventModal, daySelected, dispatchCalEvent } =
+  const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent } =
     useContext(GlobalContext);
+
+  const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : "");
+  const [description, setDescription] = useState(
+    selectedEvent ? selectedEvent.description : ""
+  );
+  const [selectedLabel, setSelectedLabel] = useState(
+    selectedEvent
+      ? labelsClasses.find((label) => label === selectedEvent.label)
+      : labelsClasses[0]
+  );
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -23,7 +30,7 @@ export default function EventModal() {
 
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
-      <form className="bg-white rounded-lg shadow-2xl w-1/4">
+      <form className="bg-white rounded-lg shadow-2xl  w-1/4">
         <header className="bg-gray-100 px-4 py-2 flex justify-between items-center">
           <span className="material-icons-outlined text-gray-400">
             drag_handle

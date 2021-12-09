@@ -1,10 +1,21 @@
 import dayjs from "dayjs";
 import React from "react";
-import { useContext } from "react/cjs/react.development";
+import { useContext, useState, useEffect } from "react/cjs/react.development";
 import GlobalContext from "../context/GlobalContext";
 
 // {day} comes from Month.js
 export default function Day({ day, weekIdx }) {
+  const [dayEvents, setDayEvents] = useState([]);
+  const { setDaySelected, setShowEventModal, savedEvents, setSelectedEvent } =
+    useContext(GlobalContext);
+
+  useEffect(() => {
+    const events = savedEvents.filter(
+      (evt) => dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
+    );
+    setDayEvents(events);
+  }, [savedEvents, day]);
+
   function getCurrentDayClass() {
     // console.log("format-->", day.format("DD-MM-YY"));
     //dayjs().format() indiciates today's daate
@@ -12,8 +23,6 @@ export default function Day({ day, weekIdx }) {
       ? "bg-red-200 text-white rounded-full w-7"
       : "";
   }
-
-  const { setDaySelected, setShowEventModal } = useContext(GlobalContext);
 
   return (
     <div className="border border-gray-200 flex flex-col">
@@ -32,7 +41,15 @@ export default function Day({ day, weekIdx }) {
           setShowEventModal(true);
         }}
       >
-        {" "}
+        {dayEvents.map((evt, idx) => (
+          <div
+            key={idx}
+            onClick={() => setSelectedEvent(evt)}
+            className={`bg-${evt.label}-200 p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate`}
+          >
+            {evt.title}
+          </div>
+        ))}
       </div>
     </div>
   );
