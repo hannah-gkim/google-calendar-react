@@ -5,7 +5,7 @@ React Google Calendar
 # Demo
 
 <p align="center">
-<a href="https://hannah-gkim.github.io/vue-js-Ghibli" >
+<a href="" >
    <img width="500" height="340" src="demo.png">
   </a>
 </p>
