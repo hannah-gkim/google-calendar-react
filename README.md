@@ -2,10 +2,10 @@
 
 React Google Calendar
 
-# Demo
+<!-- # Demo -->
 
 <p align="center">
-<a href="" >
+<a href="#" >
    <img width="500" height="340" src="demo.png">
   </a>
 </p>
